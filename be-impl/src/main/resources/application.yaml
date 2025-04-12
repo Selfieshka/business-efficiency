@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    url: ${URL}
+    driver-class-name: ${DRIVER}
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
