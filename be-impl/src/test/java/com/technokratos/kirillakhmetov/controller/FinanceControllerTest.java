@@ -33,17 +33,14 @@ public class FinanceControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Очищаем таблицы перед каждым тестом
         financeRepository.deleteAll();
         jdbcTemplate.update("DELETE FROM owner WHERE owner_id = ?", TEST_OWNER_ID);
 
-        // Создаем тестового владельца
         jdbcTemplate.update(
                 "INSERT INTO owner (owner_id, first_name, last_name, email, password, business_name) VALUES (?, ?, ?, ?, ?, ?)",
                 TEST_OWNER_ID, "Test", "Owner", "test@example.com", "password", "Test Business"
         );
 
-        // Добавляем тестовые данные
         Finance revenue = Finance.builder()
                 .ownerId(TEST_OWNER_ID)
                 .type("Доход")
