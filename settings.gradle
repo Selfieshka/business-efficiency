@@ -1,3 +1,4 @@
 rootProject.name = 'business-efficiency'
 include 'be-db'
+include 'be-api'
 include 'be-impl'

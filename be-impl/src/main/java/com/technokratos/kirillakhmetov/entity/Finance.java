@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 public class Finance {
     private Long id;
-    private Long owner_id;
+    private Long ownerId;
     private String type;
     private double amount;
     private String category;

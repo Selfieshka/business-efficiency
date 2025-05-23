@@ -1,16 +1,49 @@
+plugins {
+    id 'jacoco'
+}
+
 jar.enabled = false
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.liquibase:liquibase-core'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     runtimeOnly 'org.postgresql:postgresql'
 
     implementation project(':be-db')
+    implementation project(':be-api')
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+jacoco {
+    toolVersion = '0.8.12'
+}
+
+jacocoTestReport {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/dto/**',
+                    '**/entity/**',
+                    '**/config/**',
+                    '**/util/**',
+                    '**/mapper/**'
+            ])
+        }))
+    }
+}
+
+sourceSets {
+    test {
+        resources {
+            srcDirs += [
+                    project(":be-db").sourceSets.main.resources
+            ]
+        }
+    }
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
