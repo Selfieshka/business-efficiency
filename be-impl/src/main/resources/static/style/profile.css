@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+.account {
+    width: 80%;
+    max-width: 700px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 6px 20px;
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #333;
+}
+
+.account-title {
+    font-size: 28px;
+    color: #a8a8a8;
+    font-weight: 700;
+}
+
+.btn-container {
+    margin-left: auto;
+}
+
+.btn-cancel, .btn-save, .btn-edit {
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    padding: 15px 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 2px solid #FF6B6B;
+    color: #FF6B6B;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #FF6B6B;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-save {
+    background-color: transparent;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.btn-save:hover {
+    background-color: #388E3C;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-edit {
+    background-color: #333;
+}
+
+.btn-edit:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+.account-edit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.input-container {
+    width: calc(50% - 15px);
+    margin-bottom: 25px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-container input,
+.input-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+    transition: border-color 0.3s;
+    background-color: #f9f9f9;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.input-container input[readonly]:focus,
+.input-container textarea[readonly]:focus {
+    border-color: #ccc;
+    outline: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+    .input-container {
+        width: 100%;
+    }
+}
