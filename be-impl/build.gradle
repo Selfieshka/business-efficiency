@@ -17,6 +17,9 @@ dependencies {
 
     implementation "com.cloudinary:cloudinary-http5:$cloudinaryVersion"
 
+    implementation "org.apache.poi:poi:${apachePoiVersion}"
+    implementation "org.apache.poi:poi-ooxml:${apachePoiVersion}"
+
     implementation project(':be-db')
     implementation project(':be-api')
 
