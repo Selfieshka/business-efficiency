@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Manrope Medium", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #f5f5f5;
+}
+
+.sidebar {
+    width: 270px;
+    position: fixed;
+    margin: 16px;
+    border-radius: 16px;
+    background: #ffe8a3;
+    height: calc(100vh - 32px);
+}
+
+.sidebar-header {
+    display: flex;
+    padding: 25px 20px;
+    align-items: center;
+}
+
+.sidebar-header .header-logo img {
+    width: 46px;
+    height: 46px;
+    display: block;
+    border-radius: 50%;
+}
+
+.sidebar-header .user-name {
+    margin-left: 15px;
+    height: 35px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-family: "Manrope ExtraBold", sans-serif;
+
+}
+
+.sidebar-nav .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 4px;
+    padding: 0 15px;
+    flex-direction: column;
+    transform: translateY(15px);
+}
+
+.sidebar-nav .nav-link {
+    color: #333;
+    display: flex;
+    gap: 12px;
+    border-radius: 8px;
+    align-items: center;
+    padding: 12px 15px;
+    text-decoration: none;
+    transition: 0.4s ease;
+}
+
+.sidebar-nav .nav-link:hover {
+    color: #ffe8a3;
+    background: #333;
+}
+
+.sidebar-nav .secondary-nav {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+}
+
+.sidebar-nav .nav-link.active {
+    background: #333;
+    color: #ffe8a3;
+}
+
+.container {
+    padding: 16px 16px 16px 300px;
+}

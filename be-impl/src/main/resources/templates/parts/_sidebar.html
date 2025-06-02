@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/style/_sidebar.css}">
+    <script defer th:src="@{/js/_sidebar.js}"></script>
+    <title>Sidebar</title>
+</head>
+<body>
+
+<aside class="sidebar" th:fragment="sidebar">
+    <header class="sidebar-header">
+        <a class="header-logo">
+            <img th:if="${owner.profilePhotoUrl != null}"
+                 th:src="${owner.profilePhotoUrl}"
+                 alt="profile"
+                 class="profile-img"
+                 id="profile-image"/>
+            <img th:unless="${owner.profilePhotoUrl != null}"
+                 th:src="@{/img/avatar_default.png}"
+                 alt="profile"
+                 class="profile-img"
+                 id="profile-image"/>
+            <input name="profilePhoto" type="file" id="file-input" style="display: none;"
+                   accept="image/x-png, image/jpeg"/>
+        </a>
+        <span class="user-name" th:text="${owner.firstName}"></span>
+    </header>
+
+    <nav class="sidebar-nav">
+        <ul class="nav-list primary-nav">
+            <li class="nav-item">
+                <a th:href="@{/main}" class="nav-link" th:classappend="${currentPage == 'main' ? 'active' : ''}">
+                    <span class="nav-icon material-symbols-rounded">Home</span>
+                    <span class="nav-label">Главная</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/staff}" class="nav-link" th:classappend="${currentPage == 'staff' ? 'active' : ''}">
+                    <span class="nav-icon material-symbols-rounded">Groups</span>
+                    <span class="nav-label">Сотрудники</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/finance}" class="nav-link" th:classappend="${currentPage == 'finance' ? 'active' : ''}">
+                    <span class="nav-icon material-symbols-rounded">Finance</span>
+                    <span class="nav-label">Финансы</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/invoices}" class="nav-link"
+                   th:classappend="${currentPage == 'invoices' ? 'active' : ''}">
+                    <span class="nav-icon material-symbols-rounded">Docs</span>
+                    <span class="nav-label">Накладные</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav-list secondary-nav">
+            <li class="nav-item" th:unless="${currentPage == 'profile'}">
+                <a th:href="@{/profile}" class="nav-link">
+                    <span class="nav-icon material-symbols-rounded">Account_Circle</span>
+                    <span class="nav-label">Профиль</span>
+                </a>
+            </li>
+            <li class="nav-item" th:if="${currentPage == 'profile'}" id="logoutForm">
+                <form method="POST" th:action="@{/profile/logout}" style="cursor: pointer" class="nav-link logout">
+                    <button type="submit" class="nav-link logout" style="display:none;" id="logoutButton"></button>
+                    <span class="nav-icon material-symbols-rounded">Logout</span>
+                    <span class="nav-label">Выйти</span>
+                </form>
+            </li>
+            <li class="nav-item" th:if="${currentPage == 'profile'}" id="deleteForm">
+                <form method="POST" th:action="@{/profile/delete}" style="cursor: pointer" class="nav-link delete">
+                    <button type="submit" class="nav-link delete" id="deleteButton" style="display:none"></button>
+                    <span class="nav-icon material-symbols-rounded">Delete</span>
+                    <span class="nav-label">Удалить аккаунт</span>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+</body>
+</html>
