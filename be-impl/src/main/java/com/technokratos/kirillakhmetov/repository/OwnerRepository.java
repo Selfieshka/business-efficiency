@@ -20,8 +20,7 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
                 o.phoneNumber = :phoneNumber
             WHERE o.email = :email
             """)
-    int updateOwnerProfile(String firstName, String lastName, String patronymic,
-                           Integer age, String phoneNumber, String email);
+    int updateOwnerProfile(String firstName, String lastName, String patronymic, Integer age, String email, String phoneNumber);
 
     @Modifying
     @Query("DELETE FROM Owner o WHERE o.email = :email")
