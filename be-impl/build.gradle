@@ -8,6 +8,7 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     runtimeOnly 'org.postgresql:postgresql'
 
     implementation project(':be-db')
