@@ -107,13 +107,22 @@ public class FinanceService {
     }
 
     public MonthInfoResponse getMonthInfo(Long id) {
-        LocalDate dateNow = LocalDate.now();
-        double monthRevenue = financeRepository.getSumRevenuesMonthById(id);
-        double monthExpenses = financeRepository.getSumExpensesMonthById(id);
-        double prevMonthRecord = financeRepository.getMonthProfitById(id, dateNow.minusMonths(1))
-                - financeRepository.getMonthProfitById(id, dateNow);
+        LocalDate now = LocalDate.now();
+        LocalDate startOfMonth = now.withDayOfMonth(1);
+        LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth());
+        double monthRevenue = financeRepository.getSumRevenuesMonthById(id).orElse(0D);
+        double monthExpenses = financeRepository.getSumExpensesMonthById(id).orElse(0D);
+        double prevMonthRecord =
+                financeRepository.getMonthProfitById(
+                        id,
+                        now.minusMonths(1).getMonthValue(),
+                        now.minusMonths(1).getYear()).orElse(0D)
+                        - financeRepository.getMonthProfitById(
+                        id,
+                        now.getMonthValue(),
+                        now.getYear()).orElse(0D);
         return new MonthInfoResponse(
-                dateNow.format(FORMATTER),
+                now.format(FORMATTER),
                 monthRevenue,
                 monthExpenses,
                 prevMonthRecord < 0 ? 0 : (double) Math.round(prevMonthRecord * 100) / 100

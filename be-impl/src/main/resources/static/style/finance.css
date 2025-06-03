@@ -1,0 +1,291 @@
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.4;
+    margin-top: 45px;
+}
+
+.stat-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.plus-icon {
+    font-size: 24px;
+    color: green;
+    margin-top: 10px;
+}
+
+
+.chart-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 600px;
+    transition: all 0.3s ease;
+}
+
+.material-symbols-rounded.close {
+    color: #333;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.material-symbols-rounded.close:hover, .material-symbols-rounded.close:focus {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+#data-container {
+    margin-top: 20px;
+    height: 410px;
+}
+
+#data-container .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+#data-container .item-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.column {
+    flex: 1;
+    min-width: 150px;
+    text-align: left;
+}
+
+.month {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.month-stats {
+    flex: 1;
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 10px 20px 10px 10px;
+    margin-right: 20px;
+}
+
+.month-stats p {
+    font-size: 16px;
+    margin: 5px 0;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.month-stats .current-date {
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.month-stats .revenue {
+    color: green;
+    font-weight: bold;
+    border: 1px solid green;
+    padding: 5px;
+    background-color: #e9ffe9;
+}
+
+.month-stats .expenses {
+    color: red;
+    font-weight: bold;
+    border: 1px solid red;
+    padding: 5px;
+    background-color: #ffe9e9;
+}
+
+.month-stats .record {
+    font-style: italic;
+}
+
+.charts-row {
+    flex: 1;
+    padding: 10px;
+}
+
+.charts-row label {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+#expensesChart {
+    width: 80% !important;
+    height: 80% !important;
+}
+
+#profit {
+    margin-bottom: 60px;
+}
+
+.pagination .page-link {
+    background-color: #f5f5f5;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    border-color: #333;
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    border-color: #333;
+    background-color: #333;
+    color: white;
+}
+
+.errors-box {
+    margin-top: 15px;
+    background-color: rgb(205, 23, 23);
+    padding: 10px;
+    border: 1px solid red;
+    width: 420px;
+    color: black;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.dropdown {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#expense-category {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 4px;
+}
+
+.category-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.category-item:hover {
+    background-color: #f1f1f1;
+}

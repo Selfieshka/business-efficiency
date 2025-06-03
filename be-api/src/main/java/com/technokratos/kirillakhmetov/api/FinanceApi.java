@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
-@RequestMapping("/api/stats")
+@RequestMapping("/api/v1/stats")
 public interface FinanceApi {
 
     @GetMapping("/revenue")

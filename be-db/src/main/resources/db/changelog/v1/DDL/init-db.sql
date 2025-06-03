@@ -118,12 +118,12 @@ CREATE SEQUENCE product_sequence
 
 CREATE TABLE product
 (
-    product_id       BIGINT         NOT NULL DEFAULT NEXTVAL('product_sequence'),
-    invoice_id       BIGINT         NOT NULL,
-    name             VARCHAR(100)   NOT NULL,
-    measurement_unit VARCHAR(10)    NOT NULL,
-    quantity         INT            NOT NULL,
-    unit_price       NUMERIC(12, 2) NOT NULL,
+    product_id       BIGINT           NOT NULL DEFAULT NEXTVAL('product_sequence'),
+    invoice_id       BIGINT           NOT NULL,
+    name             VARCHAR(100)     NOT NULL,
+    measurement_unit VARCHAR(10)      NOT NULL,
+    quantity         INT              NOT NULL,
+    unit_price       DOUBLE PRECISION NOT NULL,
     ----------------------------------------
     CONSTRAINT product_id_pk PRIMARY KEY (product_id),
     CONSTRAINT invoice_id_fk FOREIGN KEY (invoice_id) REFERENCES invoice (invoice_id) ON DELETE CASCADE
