@@ -8,6 +8,7 @@ import com.technokratos.kirillakhmetov.util.mapper.OwnerMapper;
 import jakarta.servlet.http.Part;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -37,14 +38,15 @@ public class OwnerService {
         );
     }
 
+    @Transactional
     public OwnerDto changePersonalData(OwnerDto ownerDto) {
         ownerRepository.updateOwnerProfile(
                 ownerDto.firstName(),
                 ownerDto.lastName(),
                 ownerDto.patronymic(),
                 ownerDto.age(),
-                ownerDto.email(),
-                ownerDto.phoneNumber()
+                ownerDto.phoneNumber(),
+                ownerDto.email()
         );
 
         return ownerMapper.toOwnerDto(
@@ -58,6 +60,7 @@ public class OwnerService {
         ownerRepository.deleteByEmail(email);
     }
 
+    @Transactional
     public String uploadProfilePhoto(Part photo, String email) {
         try (InputStream inputStream = photo.getInputStream()) {
             String url = uploadImage(inputStream, photo.getSubmittedFileName());
