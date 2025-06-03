@@ -9,10 +9,11 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <link type="image/png" sizes="512x512" rel="icon" th:href="@{/img/favicon.png}">
     <link rel="stylesheet" type="text/css" th:href="@{/style/profile.css}">
     <script defer th:src="@{/js/profile.js}"></script>
 
-    <link th:include="fragments/sidebar :: styles">
+    <link th:insert="~{fragments/sidebar :: styles}">
 </head>
 <body>
 

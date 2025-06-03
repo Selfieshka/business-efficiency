@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link type="image/png" sizes="512x512" rel="icon" th:href="@{/img/favicon.png}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"/>
@@ -14,10 +15,11 @@
     <link rel="stylesheet" th:href="@{/style/finance.css}"/>
     <script defer th:src="@{/js/finance.js}"></script>
 
-    <link th:include="fragments/sidebar :: styles">
+    <link th:insert="~{fragments/sidebar :: styles}">
 </head>
 
 <body>
+
 <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
 <div class="container">
