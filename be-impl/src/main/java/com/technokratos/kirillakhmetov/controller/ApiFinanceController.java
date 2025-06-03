@@ -1,10 +1,7 @@
 package com.technokratos.kirillakhmetov.controller;
 
 import com.technokratos.kirillakhmetov.api.FinanceApi;
-import com.technokratos.kirillakhmetov.dto.response.ExpenseResponse;
-import com.technokratos.kirillakhmetov.dto.response.FinancePaginationDto;
-import com.technokratos.kirillakhmetov.dto.response.FinanceResponse;
-import com.technokratos.kirillakhmetov.dto.response.ProfitResponse;
+import com.technokratos.kirillakhmetov.dto.response.*;
 import com.technokratos.kirillakhmetov.service.BankAccountService;
 import com.technokratos.kirillakhmetov.service.FinanceService;
 import lombok.RequiredArgsConstructor;
@@ -20,49 +17,41 @@ public class ApiFinanceController implements FinanceApi {
 
     @Override
     public FinanceResponse getRevenue() {
-        Long ownerId = 123L;
-        return financeService.calculateRevenue(ownerId);
+        return financeService.calculateRevenue(100000L);
     }
 
     @Override
     public FinanceResponse getExpense() {
-        Long ownerId = 123L;
-        return financeService.calculateExpense(ownerId);
+        return financeService.calculateExpense(100000L);
     }
 
     @Override
-    public void getMoney() {
-        bankAccountService.calculateAllAmount(100000L);
+    public ApiFinanceDto getMoney() {
+        return bankAccountService.calculateAllAmount(100000L);
     }
 
     @Override
     public FinanceResponse getProfit() {
-        Long ownerId = 123L;
-        return financeService.calculateProfit(ownerId);
+        return financeService.calculateProfit(100000L);
     }
 
     @Override
     public ProfitResponse getProfitAnalytics() {
-        Long ownerId = 123L;
-        return financeService.analyzeProfit(ownerId);
+        return financeService.analyzeProfit(100000L);
     }
 
     @Override
     public ExpenseResponse getExpenseAnalytics() {
-        Long ownerId = 123L;
-        return financeService.analyzeExpense(ownerId);
+        return financeService.analyzeExpense(100000L);
     }
 
     @Override
     public String getCountRevenuesExpenses() {
-        Long ownerId = 123L;
-        return financeService.getCountItems(ownerId);
+        return financeService.getCountItems(100000L);
     }
 
     @Override
     public List<FinancePaginationDto> getItemsRevenuesExpenses() {
-        Long ownerId = 123L;
-        int page = 1;
-        return financeService.getPage(ownerId, page);
+        return financeService.getPage(100000L, 1);
     }
 }

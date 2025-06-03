@@ -18,7 +18,7 @@ public class MoneyController {
     @PostMapping
     public String create(HttpServletRequest req, HttpServletResponse resp) {
         bankAccountService.addAccount(new BankAccountDto(
-                (Long) req.getSession().getAttribute("id"),
+                100000L,
                 req.getParameter("bankName"),
                 Double.parseDouble(req.getParameter("amount"))
         ));

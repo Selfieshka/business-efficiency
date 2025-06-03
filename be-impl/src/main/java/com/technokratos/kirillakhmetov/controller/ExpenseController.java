@@ -20,7 +20,7 @@ public class ExpenseController {
     @PostMapping
     public String create(HttpServletRequest req, HttpServletResponse resp) {
         financeService.addExpense(new FinanceDto(
-                (Long) req.getSession().getAttribute("id"),
+                100000L,
                 Double.parseDouble(req.getParameter("amount")),
                 req.getParameter("category"),
                 LocalDate.parse(req.getParameter("date"))));

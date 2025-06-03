@@ -1,9 +1,6 @@
 package com.technokratos.kirillakhmetov.api;
 
-import com.technokratos.kirillakhmetov.dto.response.ExpenseResponse;
-import com.technokratos.kirillakhmetov.dto.response.FinancePaginationDto;
-import com.technokratos.kirillakhmetov.dto.response.FinanceResponse;
-import com.technokratos.kirillakhmetov.dto.response.ProfitResponse;
+import com.technokratos.kirillakhmetov.dto.response.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +21,7 @@ public interface FinanceApi {
 
     @GetMapping("/money")
     @ResponseStatus(HttpStatus.OK)
-    void getMoney();
+    ApiFinanceDto getMoney();
 
     @GetMapping("/profit")
     @ResponseStatus(HttpStatus.OK)

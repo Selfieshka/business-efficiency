@@ -20,7 +20,7 @@ public class RevenueController {
     @PostMapping
     public String create(HttpServletRequest req, HttpServletResponse resp) {
         financeService.addRevenue(new FinanceDto(
-                (Long) req.getSession().getAttribute("id"),
+                100000L,
                 Double.parseDouble(req.getParameter("amount")),
                 "Выручка",
                 LocalDate.parse(req.getParameter("date"))

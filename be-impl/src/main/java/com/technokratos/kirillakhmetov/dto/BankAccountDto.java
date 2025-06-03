@@ -1,7 +1,7 @@
 package com.technokratos.kirillakhmetov.dto;
 
 public record BankAccountDto(
-        Long owner_id,
+        Long ownerId,
         String bankName,
         double amount) {
 }

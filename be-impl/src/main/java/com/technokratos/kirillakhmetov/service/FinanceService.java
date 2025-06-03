@@ -1,9 +1,12 @@
 package com.technokratos.kirillakhmetov.service;
 
+import com.technokratos.kirillakhmetov.dto.ExpenseCategorySummary;
 import com.technokratos.kirillakhmetov.dto.FinanceDto;
+import com.technokratos.kirillakhmetov.dto.ProfitAnalysisDto;
 import com.technokratos.kirillakhmetov.dto.response.*;
 import com.technokratos.kirillakhmetov.entity.Finance;
 import com.technokratos.kirillakhmetov.repository.FinanceRepository;
+import com.technokratos.kirillakhmetov.repository.OwnerRepository;
 import com.technokratos.kirillakhmetov.util.mapper.FinanceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,42 +21,53 @@ import java.util.List;
 public class FinanceService {
     private static final int LIMIT = 5;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private final OwnerRepository ownerRepository;
     private final FinanceRepository financeRepository;
     private final FinanceMapper financeMapper;
 
+
     public void addRevenue(FinanceDto financeDto) {
-        financeRepository.save(financeMapper.toFinance(financeDto, "Доход"));
+        financeRepository.save(financeMapper.toFinance(
+                financeDto,
+                ownerRepository.findById(financeDto.ownerId())
+                        .orElseThrow(() -> new RuntimeException("User with id = %s - not found".formatted(financeDto.ownerId()))),
+                "Доход"));
     }
 
     public void addExpense(FinanceDto financeDto) {
-        financeRepository.save(financeMapper.toFinance(financeDto, "Расход"));
+        financeRepository.save(financeMapper.toFinance(
+                financeDto,
+                ownerRepository.findById(financeDto.ownerId())
+                        .orElseThrow(() -> new RuntimeException("User with id = %s - not found".formatted(financeDto.ownerId()))),
+                "Расход"));
     }
 
     public FinanceResponse calculateRevenue(Long id) {
-        double sumRevenue = financeRepository.sumAllRevenueByOwnerId(id);
+        double sumRevenue = financeRepository.sumAllRevenueByOwnerId(id).orElse(0D);
         return new FinanceResponse(sumRevenue);
     }
 
     public FinanceResponse calculateExpense(Long id) {
-        double sumExpense = financeRepository.sumAllExpenseByOwnerId(id);
+        double sumExpense = financeRepository.sumAllExpenseByOwnerId(id).orElse(0D);
+        System.out.println(id + " " + sumExpense);
         return new FinanceResponse(sumExpense);
     }
 
     public FinanceResponse calculateProfit(Long idOwner) {
-        double profit = financeRepository.sumAllRevenueByOwnerId(idOwner)
-                - financeRepository.sumAllExpenseByOwnerId(idOwner);
+        double profit = financeRepository.sumAllRevenueByOwnerId(idOwner).orElse(0D)
+                - financeRepository.sumAllExpenseByOwnerId(idOwner).orElse(0D);
         return new FinanceResponse(profit);
     }
 
-    public ProfitResponse analyzeProfit(Long idOwner) {
-        List<Finance> finances = financeRepository.profitAnalysisByOwnerId(idOwner);
+    public ProfitResponse analyzeProfit(Long ownerId) {
+        List<ProfitAnalysisDto> finances = financeRepository.profitAnalysisByOwnerId(ownerId);
         List<String> dates = new ArrayList<>();
         List<String> amounts = new ArrayList<>();
         String forecastDate = null;
         if (!finances.isEmpty()) {
-            for (Finance finance : finances) {
-                dates.add(finance.getDate().format(FORMATTER));
-                amounts.add(String.valueOf(finance.getAmount()));
+            for (ProfitAnalysisDto finance : finances) {
+                dates.add(finance.date().toLocalDate().format(FORMATTER));
+                amounts.add(String.valueOf(finance.amount()));
             }
             forecastDate = LocalDate.parse(dates.getLast(), FORMATTER).plusMonths(1).format(FORMATTER);
             dates.add(forecastDate);
@@ -63,12 +77,12 @@ public class FinanceService {
     }
 
     public ExpenseResponse analyzeExpense(Long idOwner) {
-        List<Finance> finances = financeRepository.expenseAnalysisByOwnerId(idOwner);
+        List<ExpenseCategorySummary> finances = financeRepository.expenseAnalysisByOwnerId(idOwner);
         List<String> categories = new ArrayList<>();
         List<String> amounts = new ArrayList<>();
-        for (Finance finance : finances) {
-            categories.add(String.valueOf(finance.getCategory()));
-            amounts.add(String.valueOf(finance.getAmount()));
+        for (ExpenseCategorySummary expenseCategorySummary : finances) {
+            categories.add(String.valueOf(expenseCategorySummary.category()));
+            amounts.add(String.valueOf(expenseCategorySummary.totalAmount()));
         }
         return new ExpenseResponse(categories, amounts);
     }
