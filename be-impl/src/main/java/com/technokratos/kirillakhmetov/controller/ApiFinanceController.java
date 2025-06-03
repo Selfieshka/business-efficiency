@@ -5,6 +5,7 @@ import com.technokratos.kirillakhmetov.dto.response.ExpenseResponse;
 import com.technokratos.kirillakhmetov.dto.response.FinancePaginationDto;
 import com.technokratos.kirillakhmetov.dto.response.FinanceResponse;
 import com.technokratos.kirillakhmetov.dto.response.ProfitResponse;
+import com.technokratos.kirillakhmetov.service.BankAccountService;
 import com.technokratos.kirillakhmetov.service.FinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApiFinanceController implements FinanceApi {
     private final FinanceService financeService;
+    private final BankAccountService bankAccountService;
 
     @Override
     public FinanceResponse getRevenue() {
@@ -30,7 +32,7 @@ public class ApiFinanceController implements FinanceApi {
 
     @Override
     public void getMoney() {
-
+        bankAccountService.calculateAllAmount(100000L);
     }
 
     @Override
