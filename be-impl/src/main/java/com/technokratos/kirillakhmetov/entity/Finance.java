@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -33,7 +32,7 @@ public class Finance {
     private String type;
 
     @Column(name = "amount", precision = 12, scale = 2, nullable = false)
-    private BigDecimal amount;
+    private Double amount;
 
     @Column(name = "category", length = 30, nullable = false)
     private String category;

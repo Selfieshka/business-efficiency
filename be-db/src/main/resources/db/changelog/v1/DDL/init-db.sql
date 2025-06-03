@@ -77,12 +77,12 @@ CREATE SEQUENCE finance_sequence
 
 CREATE TABLE finance
 (
-    finance_id BIGINT         NOT NULL DEFAULT NEXTVAL('finance_sequence'),
-    owner_id   BIGINT         NOT NULL,
-    type       VARCHAR(30)    NOT NULL,
-    amount     NUMERIC(12, 2) NOT NULL,
-    category   VARCHAR(30)    NOT NULL,
-    date       DATE           NOT NULL,
+    finance_id BIGINT           NOT NULL DEFAULT NEXTVAL('finance_sequence'),
+    owner_id   BIGINT           NOT NULL,
+    type       VARCHAR(30)      NOT NULL,
+    amount     DOUBLE PRECISION NOT NULL,
+    category   VARCHAR(30)      NOT NULL,
+    date       DATE             NOT NULL,
     ---------------------------------------
     CONSTRAINT finance_id_pk PRIMARY KEY (finance_id),
     CONSTRAINT owner_id_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id) ON DELETE CASCADE

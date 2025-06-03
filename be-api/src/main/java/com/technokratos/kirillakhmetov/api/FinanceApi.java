@@ -1,7 +1,7 @@
 package com.technokratos.kirillakhmetov.api;
 
 import com.technokratos.kirillakhmetov.dto.response.ExpenseResponse;
-import com.technokratos.kirillakhmetov.dto.response.FinancePaginationResponse;
+import com.technokratos.kirillakhmetov.dto.response.FinancePaginationDto;
 import com.technokratos.kirillakhmetov.dto.response.FinanceResponse;
 import com.technokratos.kirillakhmetov.dto.response.ProfitResponse;
 import org.springframework.http.HttpStatus;
@@ -44,6 +44,6 @@ public interface FinanceApi {
 
     @GetMapping("/revenues-expenses/items")
     @ResponseStatus(HttpStatus.OK)
-    List<FinancePaginationResponse> getItemsRevenuesExpenses();
+    List<FinancePaginationDto> getItemsRevenuesExpenses();
 
 }
