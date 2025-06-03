@@ -3,12 +3,17 @@ package com.technokratos.kirillakhmetov.service;
 import com.technokratos.kirillakhmetov.dto.InvoiceDto;
 import com.technokratos.kirillakhmetov.dto.ProductDto;
 import com.technokratos.kirillakhmetov.entity.Invoice;
+import com.technokratos.kirillakhmetov.entity.Owner;
+import com.technokratos.kirillakhmetov.entity.Product;
 import com.technokratos.kirillakhmetov.repository.InvoiceRepository;
+import com.technokratos.kirillakhmetov.repository.OwnerRepository;
+import com.technokratos.kirillakhmetov.repository.ProductRepository;
 import com.technokratos.kirillakhmetov.util.ExcelReader;
 import jakarta.servlet.http.Part;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xssf.usermodel.XSSFWorkbookType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,10 +25,38 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
+    private final ProductRepository productRepository;
+    private final OwnerRepository ownerRepository;
 
+    @Transactional
     public void saveInvoiceInfo(InvoiceDto invoiceDto, Part invoice, Map<String, String> headerNames) {
         List<ProductDto> products = analyze(invoice, headerNames);
-        invoiceRepository.saveInvoiceWithProducts(invoiceDto, products);
+        saveInvoiceWithProducts(invoiceDto, products);
+    }
+
+    @Transactional
+    public void saveInvoiceWithProducts(InvoiceDto invoiceDto, List<ProductDto> products) {
+        Owner owner = ownerRepository.findById(invoiceDto.ownerId())
+                .orElseThrow(() -> new RuntimeException("Owner not found"));
+
+        Invoice invoice = new Invoice();
+        invoice.setOwner(owner);
+        invoice.setNumber(invoiceDto.number());
+        invoice.setDate(invoiceDto.date());
+        invoice.setProducts(new ArrayList<>());
+
+        for (ProductDto productDto : products) {
+            Product product = new Product();
+            product.setName(productDto.name());
+            product.setMeasurementUnit(productDto.measurementUnit());
+            product.setQuantity(productDto.quantity());
+            product.setUnitPrice(productDto.costPerUnit());
+            product.setInvoice(invoice);
+
+            invoice.getProducts().add(product);
+        }
+
+        invoiceRepository.save(invoice);
     }
 
     private List<ProductDto> analyze(Part invoice, Map<String, String> headerNames) {

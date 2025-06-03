@@ -31,7 +31,7 @@ public class Finance {
     @Column(name = "type", length = 30, nullable = false)
     private String type;
 
-    @Column(name = "amount", precision = 12, scale = 2, nullable = false)
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     @Column(name = "category", length = 30, nullable = false)

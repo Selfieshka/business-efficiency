@@ -46,4 +46,11 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmployeePosition> employeePositions;
+
+    public void addPosition(Position position) {
+        EmployeePosition employeePosition = new EmployeePosition(
+                new EmployeePositionId(this.id, position.getId()), this, position);
+        employeePositions.add(employeePosition);
+        position.getEmployeePositions().add(employeePosition);
+    }
 }
