@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" type="text/css" th:href="@{/style/_sidebar.css}">
-    <script defer th:src="@{/js/_sidebar.js}"></script>
-    <title>Sidebar</title>
-</head>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <body>
+
+<th:block th:fragment="styles">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style/sidebar.css}"/>
+    <script defer th:src="@{/js/sidebar.js}"></script>
+</th:block>
 
 <aside class="sidebar" th:fragment="sidebar">
     <header class="sidebar-header">
