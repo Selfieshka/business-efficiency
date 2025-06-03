@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Регистрация</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" th:href="@{/style/registration.css}">
 </head>
-
 <body>
+
 <div class="wrapper">
     <form method="POST" th:action="@{/registration}">
         <h2>Присоединяйтесь к нам,<br>создайте свой аккаунт</h2>
@@ -31,8 +32,8 @@
         </div>
     </form>
 
-    <div th:replace="~{parts/_errors :: errors}"></div>
-    <div th:replace="~{parts/_footer :: footer}"></div>
+    <div th:replace="~{fragments/errors :: errors}"></div>
 </div>
+
 </body>
 </html> 

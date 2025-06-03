@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Вход</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/style/login.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/style/login.css}">
 </head>
 
 <body>
+
 <div class="wrapper">
     <form method="POST" th:action="@{/login}">
         <h2>Добро пожаловать!</h2>
@@ -46,8 +49,9 @@
         </span>
     </div>
 
-    <div th:replace="~{parts/_errors :: errors}"></div>
-    <div th:replace="~{parts/_footer :: footer}"></div>
+    <div th:replace="~{fragments/errors :: errors}"></div>
+    <div th:replace="~{fragments/_footer :: footer}"></div>
 </div>
+
 </body>
 </html>
