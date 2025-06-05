@@ -73,3 +73,14 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+function showInvoiceInfoFromElement(element) {
+    const id = element.getAttribute('data-invoice-id');
+    const number = element.getAttribute('data-number');
+    const date = element.getAttribute('data-date');
+    const sum = element.getAttribute('data-sum');
+    const count = element.getAttribute('data-count');
+    const countTov = element.getAttribute('data-count-tov');
+
+    showInvoiceInfo(id, number, date, sum, count, countTov);
+}

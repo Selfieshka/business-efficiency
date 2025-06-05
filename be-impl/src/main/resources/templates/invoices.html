@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Накладные</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="image/png" sizes="512x512" rel="icon" th:href="@{/img/favicon.png}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/style/invoices.css}"/>
+    <script defer th:src="@{/js/invoices.js}"></script>
+
+    <link th:insert="~{fragments/sidebar :: styles}"/>
+</head>
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<body>
+
+<div class="container">
+    <header class="header">
+        <h1>Накладные</h1>
+    </header>
+
+    <div th:replace="~{fragments/errors :: errors}"></div>
+
+    <div id="invoiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Информация о накладной</h2>
+            <div id="invoiceDetails"></div>
+        </div>
+    </div>
+
+    <div class="invoice-container">
+        <button id="openModal" class="add-btn">Создать накладную</button>
+        <div class="invoice-header">
+            <span>Номер накладной</span>
+            <span>Дата</span>
+            <span>Удалить</span>
+        </div>
+
+        <div th:each="invoice : ${invoices}"
+             class="invoice-row"
+             th:attr="data-invoice-id=${invoice.invoiceId},
+                      data-number=${invoice.number},
+                      data-date=${invoice.date},
+                      data-sum=${invoice.sum},
+                      data-count=${invoice.count},
+                      data-count-tov=${invoice.countTov}"
+             onclick="showInvoiceInfoFromElement(this)">
+            <div class="invoice-info">
+                <span th:text="${invoice.number}"></span>
+                <span th:text="${invoice.date}"></span>
+            </div>
+            <span class="delete-btn"
+                  th:onclick="'deleteInvoice(' + ${invoice.invoiceId} + ', this.closest(\'.invoice-row\'))'">&times;</span>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal-container">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="number">Введите номер накладной:</label>
+                <input type="text" id="number" name="number" required/>
+                <label for="date">Введите дату накладной:</label>
+                <input type="date" id="date" name="date" required/>
+                <label for="invoice">Выберите файл накладной:</label>
+                <input type="file" id="invoice" name="invoice" required/>
+
+                <h3>Заполните необходимые поля для анализа накладной:</h3>
+
+                <label for="productName">Название колонки наименования товара</label>
+                <input type="text" id="productName" name="productName" required/>
+                <label for="unitMeasure">Название колонки единиц измерения товара</label>
+                <input type="text" id="unitMeasure" name="unitMeasure" required/>
+                <label for="quantity">Название колонки количество товара</label>
+                <input type="text" id="quantity" name="quantity" required/>
+                <label for="costPerUnit">Название колонки стоимости товара за единицу</label>
+                <input type="text" id="costPerUnit" name="costPerUnit" required/>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,13 +1,16 @@
 package com.technokratos.kirillakhmetov.controller;
 
 import com.technokratos.kirillakhmetov.dto.InvoiceDto;
+import com.technokratos.kirillakhmetov.dto.OwnerDto;
 import com.technokratos.kirillakhmetov.service.InvoiceService;
+import com.technokratos.kirillakhmetov.service.OwnerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,10 +22,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class InvoiceController {
     private final InvoiceService invoiceService;
+    private final OwnerService ownerService;
 
     @GetMapping
-    public String getInvoice() {
-        invoiceService.getAllInvoices(100000L);
+    public String getInvoice(Model model) {
+        OwnerDto owner = ownerService.getProfileInfo("kirill@gmail.com");
+        model.addAttribute("owner", owner);
+        model.addAttribute("invoices", invoiceService.getAllInvoices(100000L));
         return "invoices";
     }
 
@@ -38,7 +44,7 @@ public class InvoiceController {
 
         if (invoiceService.checkExtension(invoice)) {
             invoiceService.saveInvoiceInfo(new InvoiceDto(
-                    (Long) req.getSession().getAttribute("id"),
+                    100000L,
                     null,
                     req.getParameter("number"),
                     LocalDate.parse(req.getParameter("date")),

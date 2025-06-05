@@ -20,17 +20,15 @@ public final class ExcelReader {
             Sheet sheet = workbook.getSheetAt(0);
             List<ProductDto> products = new ArrayList<>();
 
-            Map<String, Integer> columnIndices = getColumnIndexes(sheet.getRow(0), headerNames);
+            Map<String, Integer> columnIndexes = getColumnIndexes(sheet.getRow(0), headerNames);
 
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
                 if (row == null) continue;
-
-                String productNameValue = getCellValue(row, columnIndices.get(headerNames.get("productName")), CellType.STRING);
-                String unitMeasureValue = getCellValue(row, columnIndices.get(headerNames.get("unitMeasure")), CellType.STRING);
-                Double quantityValue = getCellValue(row, columnIndices.get(headerNames.get("quantity")), CellType.NUMERIC);
-                Double costPerUnitValue = getCellValue(row, columnIndices.get(headerNames.get("costPerUnit")), CellType.NUMERIC);
-
+                String productNameValue = getCellValue(row, columnIndexes.get(headerNames.get("productName")), CellType.STRING);
+                String unitMeasureValue = getCellValue(row, columnIndexes.get(headerNames.get("unitMeasure")), CellType.STRING);
+                Double quantityValue = getCellValue(row, columnIndexes.get(headerNames.get("quantity")), CellType.NUMERIC);
+                Double costPerUnitValue = getCellValue(row, columnIndexes.get(headerNames.get("costPerUnit")), CellType.NUMERIC);
                 if (productNameValue != null && unitMeasureValue != null && quantityValue != null && costPerUnitValue != null) {
                     products.add(new ProductDto(
                             productNameValue,
@@ -47,7 +45,7 @@ public final class ExcelReader {
 
     private static Map<String, Integer> getColumnIndexes(Row headerRow, Map<String, String> headerNames) {
         Map<String, Integer> columnIndices = new HashMap<>();
-        for (int j = 0; j < headerRow.getLastCellNum(); j++) {
+        for (int j = 1; j < headerRow.getLastCellNum(); j++) {
             Cell cell = headerRow.getCell(j);
             if (cell != null && cell.getCellType() == CellType.STRING) {
                 String headerValue = cell.getStringCellValue();

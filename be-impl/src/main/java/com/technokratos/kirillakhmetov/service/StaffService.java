@@ -43,7 +43,6 @@ public class StaffService {
         employee.setEmployeePositions(new ArrayList<>());
 
         for (String employeePosition : employeeForm.getPositions()) {
-            System.out.println(employeePosition);
             Position position = positionRepository.findByName(employeePosition)
                     .orElseThrow(() -> new RuntimeException("Position not found: " + employeePosition));
 
@@ -57,7 +56,6 @@ public class StaffService {
             newEmployeePosition.setPosition(position);
 
             employee.getEmployeePositions().add(newEmployeePosition);
-            System.out.println(position);
         }
 
         employeeRepository.save(employee);
