@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сотрудники</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="image/png" sizes="512x512" rel="icon" th:href="@{/img/favicon.png}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/style/staff.css}"/>
+    <script defer th:src="@{/js/staff.js}"></script>
+
+    <link th:insert="~{fragments/sidebar :: styles}">
+</head>
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<body>
+
+<div class="container">
+    <header class="header">
+        <h1>Сотрудники</h1>
+    </header>
+
+    <div th:replace="~{fragments/errors :: errors}"></div>
+
+    <div class="employee-list">
+        <button class="add-btn" id="addEmployeeBtn">Добавить сотрудника</button>
+        <div class="employee-header">
+            <span>Имя</span>
+            <span>Фамилия</span>
+            <span>Отчество</span>
+            <span>Дата</span>
+            <span>Должность</span>
+            <span>Зарплата</span>
+        </div>
+
+        <div th:each="employeeDto : ${staff}" class="employee-row">
+            <div class="employee-info">
+                <span th:text="${employeeDto.firstName}"></span>
+                <span th:text="${employeeDto.lastName}"></span>
+                <span th:text="${employeeDto.patronymic}"></span>
+                <span th:text="${employeeDto.effectiveDate}"></span>
+                <span th:text="${employeeDto.position}"></span>
+                <span>₽ <span th:text="${employeeDto.salary}"></span></span>
+            </div>
+            <span class="delete-btn"
+                  th:onclick="'deleteEmployee(' + ${employeeDto.id} + ', this.closest(\'.employee-row\'))'">&times;</span>
+        </div>
+    </div>
+
+    <div id="modalContainer" class="modal-container">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <form method="POST">
+                <label for="lastName">Фамилия:</label>
+                <input type="text" id="lastName" name="lastName" required><br>
+
+                <label for="firstName">Имя:</label>
+                <input type="text" id="firstName" name="firstName" required><br>
+
+                <label for="patronymic">Отчество:</label>
+                <input type="text" id="patronymic" name="patronymic"><br>
+
+                <label for="effectiveDate">Дата вступления в должность:</label>
+                <input type="date" id="effectiveDate" min="2000-01-01" max="9999-12-31" name="effectiveDate"
+                       required><br>
+
+                <label for="jobSearch">Поиск должности:</label>
+                <input type="text" id="jobSearch" placeholder="Поиск должности..." onkeyup="filterJobs()"
+                       onfocus="showJobOptions()"><br>
+
+                <div id="jobOptions" class="job-options" style="display:none;"></div>
+
+                <div id="selectedJobs" class="job-tags"></div>
+                <input type="hidden" id="positions" name="positions" value="">
+
+                <label for="salary">Зарплата:</label>
+                <input type="number" id="salary" min="1" max="9999999999" name="salary" required><br>
+
+                <button type="submit">Добавить сотрудника</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
