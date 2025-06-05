@@ -11,20 +11,13 @@ public interface StaffRepository extends JpaRepository<Employee, Long> {
     @Query(
             """
                     SELECT
-                            e.owner.id AS ownerId,
-                            e.firstName AS firstName,
-                            e.lastName AS lastName,
-                            e.patronymic AS patronymic,
-                            e.effectiveDate AS effectiveDate,
-                            e.salary AS salary,
-                            e.id AS id,
-                            GROUP_CONCAT(p.name) AS positions
-                        FROM Employee e
-                        JOIN e.employeePositions ep
-                        JOIN ep.position p
-                        WHERE e.owner.id = :ownerId
-                        GROUP BY e.id, e.effectiveDate
-                        ORDER BY e.effectiveDate
+                            e,
+                            STRING_AGG(p.name, ', ') AS positions
+                    FROM Employee e
+                        INNER JOIN e.employeePositions ep
+                        INNER JOIN ep.position p
+                    GROUP BY e.id, e.effectiveDate
+                    ORDER BY e.effectiveDate
                     """
     )
     List<Employee> findAllByOwnerId(@Param("ownerId") Long ownerId);
