@@ -1,15 +1,15 @@
-package com.technokratos.kirillakhmetov.dto;
+package com.technokratos.kirillakhmetov.dto.response;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public record EmployeeDto(
+public record EmployeeResponse(
         Long id,
         Long ownerId,
         String firstName,
         String lastName,
         String patronymic,
         LocalDate effectiveDate,
-        List<String> position,
+        List<String> positions,
         Integer salary) {
 }

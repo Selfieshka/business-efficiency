@@ -96,7 +96,7 @@ form.addEventListener("submit", (event) => {
 
 function deleteEmployee(employeeId, element) {
     $.ajax({
-        url: basePath + `/staff/${employeeId}`,
+        url: basePath + `/api/v1/staff/${employeeId}`,
         type: 'DELETE',
         success: function (response) {
             console.log('Пользователь успешно удален:', response);

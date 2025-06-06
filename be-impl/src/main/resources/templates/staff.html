@@ -36,17 +36,17 @@
             <span>Зарплата</span>
         </div>
 
-        <div th:each="employeeDto : ${staff}" class="employee-row">
+        <div th:each="employee : ${staff}" class="employee-row">
             <div class="employee-info">
-                <span th:text="${employeeDto.firstName}"></span>
-                <span th:text="${employeeDto.lastName}"></span>
-                <span th:text="${employeeDto.patronymic}"></span>
-                <span th:text="${employeeDto.effectiveDate}"></span>
-                <span th:text="${employeeDto.position}"></span>
-                <span>₽ <span th:text="${employeeDto.salary}"></span></span>
+                <span th:text="${employee.firstName}"></span>
+                <span th:text="${employee.lastName}"></span>
+                <span th:text="${employee.patronymic}"></span>
+                <span th:text="${employee.effectiveDate}"></span>
+                <span th:text="${#strings.listJoin(employee.positions, ', ')}"></span>
+                <span>₽ <span th:text="${employee.salary}"></span></span>
             </div>
             <span class="delete-btn"
-                  th:onclick="'deleteEmployee(' + ${employeeDto.id} + ', this.closest(\'.employee-row\'))'">&times;</span>
+                  th:onclick="'deleteEmployee(' + ${employee.id} + ', this.closest(\'.employee-row\'))'">&times;</span>
         </div>
     </div>
 

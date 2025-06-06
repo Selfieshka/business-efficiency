@@ -1,6 +1,6 @@
 package com.technokratos.kirillakhmetov.util.mapper;
 
-import com.technokratos.kirillakhmetov.dto.EmployeeDto;
+import com.technokratos.kirillakhmetov.dto.response.EmployeeResponse;
 import com.technokratos.kirillakhmetov.entity.Employee;
 import com.technokratos.kirillakhmetov.entity.EmployeePosition;
 import org.mapstruct.Mapper;
@@ -14,10 +14,10 @@ import java.util.List;
 @Component
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface StaffMapper {
-    @Mapping(source = "employeePositions", target = "position", qualifiedByName = "extractPositionNamesToList")
-    EmployeeDto toEmployeeDto(Employee employee);
+    @Mapping(source = "employeePositions", target = "positions", qualifiedByName = "extractPositionNamesToList")
+    EmployeeResponse toResponse(Employee employee);
 
-    List<EmployeeDto> toEmployeeDto(List<Employee> employees);
+    List<EmployeeResponse> toResponse(List<Employee> employees);
 
     @Named("extractPositionNamesToList")
     default List<String> extractPositionNamesToList(List<EmployeePosition> positions) {
