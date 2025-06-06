@@ -212,4 +212,6 @@ gradle-app.setting
 # DEV env
 application-dev.yaml
 
+#ENV
+.env
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,windows,git

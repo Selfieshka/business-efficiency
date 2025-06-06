@@ -47,7 +47,7 @@ jacocoTestReport {
 }
 
 sourceSets {
-    test {
+    main {
         resources {
             srcDirs += [
                     project(":be-db").sourceSets.main.resources
