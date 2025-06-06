@@ -10,5 +10,5 @@ public interface StaffService {
 
     void saveEmployee(Long ownerId, EmployeeForm employeeForm);
 
-    void deleteEmployeeById(Long employeeId);
+    void deleteEmployeeById(Long ownerId, Long employeeId);
 }

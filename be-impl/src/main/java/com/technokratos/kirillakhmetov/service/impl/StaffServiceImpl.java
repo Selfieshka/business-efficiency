@@ -68,7 +68,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public void deleteEmployeeById(Long employeeId) {
+    public void deleteEmployeeById(Long ownerId, Long employeeId) {
         staffRepository.deleteById(employeeId);
     }
 }

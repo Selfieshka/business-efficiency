@@ -10,5 +10,5 @@ public interface InvoiceService {
 
     List<InvoiceResponse> getAllInvoicesByOwnerId(Long ownerId);
 
-    void deleteInvoiceById(long invoiceId);
+    void deleteInvoiceById(Long ownerId, long invoiceId);
 }

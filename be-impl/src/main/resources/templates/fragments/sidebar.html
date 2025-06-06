@@ -31,26 +31,25 @@
     <nav class="sidebar-nav">
         <ul class="nav-list primary-nav">
             <li class="nav-item">
-                <a th:href="@{/main}" class="nav-link" th:classappend="${currentPage == 'main' ? 'active' : ''}">
+                <a th:href="@{/main}" class="nav-link">
                     <span class="nav-icon material-symbols-rounded">Home</span>
                     <span class="nav-label">Главная</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a th:href="@{/staff}" class="nav-link" th:classappend="${currentPage == 'staff' ? 'active' : ''}">
+                <a th:href="@{/staff}" class="nav-link">
                     <span class="nav-icon material-symbols-rounded">Groups</span>
                     <span class="nav-label">Сотрудники</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a th:href="@{/finance}" class="nav-link" th:classappend="${currentPage == 'finance' ? 'active' : ''}">
+                <a th:href="@{/finance}" class="nav-link">
                     <span class="nav-icon material-symbols-rounded">Finance</span>
                     <span class="nav-label">Финансы</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a th:href="@{/invoices}" class="nav-link"
-                   th:classappend="${currentPage == 'invoices' ? 'active' : ''}">
+                <a th:href="@{/invoices}" class="nav-link">
                     <span class="nav-icon material-symbols-rounded">Docs</span>
                     <span class="nav-label">Накладные</span>
                 </a>
@@ -65,14 +64,14 @@
                 </a>
             </li>
             <li class="nav-item" th:if="${currentPage == 'profile'}" id="logoutForm">
-                <form method="POST" th:action="@{/profile/logout}" style="cursor: pointer" class="nav-link logout">
+                <form th:method="POST" th:action="@{/logout}" style="cursor: pointer" class="nav-link logout">
                     <button type="submit" class="nav-link logout" style="display:none;" id="logoutButton"></button>
                     <span class="nav-icon material-symbols-rounded">Logout</span>
                     <span class="nav-label">Выйти</span>
                 </form>
             </li>
             <li class="nav-item" th:if="${currentPage == 'profile'}" id="deleteForm">
-                <form method="POST" th:action="@{/profile/delete}" style="cursor: pointer" class="nav-link delete">
+                <form th:method="POST" th:action="@{/profile/delete}" style="cursor: pointer" class="nav-link delete">
                     <button type="submit" class="nav-link delete" id="deleteButton" style="display:none"></button>
                     <span class="nav-icon material-symbols-rounded">Delete</span>
                     <span class="nav-label">Удалить аккаунт</span>

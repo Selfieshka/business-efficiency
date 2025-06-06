@@ -2,6 +2,7 @@ package com.technokratos.kirillakhmetov.controller;
 
 import com.technokratos.kirillakhmetov.api.FinanceApi;
 import com.technokratos.kirillakhmetov.dto.response.*;
+import com.technokratos.kirillakhmetov.security.UserContextHolder;
 import com.technokratos.kirillakhmetov.service.BankAccountService;
 import com.technokratos.kirillakhmetov.service.impl.FinanceServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -14,44 +15,53 @@ import java.util.List;
 public class FinanceControllerApi implements FinanceApi {
     private final FinanceServiceImpl financeService;
     private final BankAccountService bankAccountServiceImpl;
+    private final UserContextHolder userContextHolderImpl;
 
     @Override
     public FinanceResponse getRevenue() {
-        return financeService.calculateRevenue(100000L);
+        return financeService.calculateRevenue(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public FinanceResponse getExpense() {
-        return financeService.calculateExpense(100000L);
+        return financeService.calculateExpense(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public FinanceResponse getMoney() {
-        return bankAccountServiceImpl.calculateAllAmount(100000L);
+        return bankAccountServiceImpl.calculateAllAmount(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public FinanceResponse getProfit() {
-        return financeService.calculateProfit(100000L);
+        return financeService.calculateProfit(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public ProfitResponse getProfitAnalytics() {
-        return financeService.analyzeProfit(100000L);
+        return financeService.analyzeProfit(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public ExpenseResponse getExpenseAnalytics() {
-        return financeService.analyzeExpense(100000L);
+        return financeService.analyzeExpense(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public PageResponse getCountRevenuesExpenses() {
-        return financeService.getCountItems(100000L);
+        return financeService.getCountItems(userContextHolderImpl
+                .getUserIdFromSecurityContext());
     }
 
     @Override
     public List<FinancePaginationResponse> getItemsRevenuesExpenses(Integer page) {
-        return financeService.getPage(100000L, page);
+        return financeService.getPage(userContextHolderImpl
+                .getUserIdFromSecurityContext(), page);
     }
 }

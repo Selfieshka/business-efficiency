@@ -15,7 +15,8 @@ public interface StaffRepository extends JpaRepository<Employee, Long> {
                             STRING_AGG(p.name, ', ') AS positions
                     FROM Employee e
                         INNER JOIN e.employeePositions ep
-                        INNER JOIN ep.position p
+                    INNER JOIN ep.position p
+                    WHERE e.owner.id = :ownerId
                     GROUP BY e.id, e.effectiveDate
                     ORDER BY e.effectiveDate
                     """

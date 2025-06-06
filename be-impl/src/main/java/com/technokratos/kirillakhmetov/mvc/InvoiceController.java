@@ -1,6 +1,8 @@
 package com.technokratos.kirillakhmetov.mvc;
 
+import com.technokratos.kirillakhmetov.dto.response.OwnerResponse;
 import com.technokratos.kirillakhmetov.form.InvoiceForm;
+import com.technokratos.kirillakhmetov.security.UserContextHolder;
 import com.technokratos.kirillakhmetov.service.InvoiceService;
 import com.technokratos.kirillakhmetov.service.OwnerService;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class InvoiceController {
     private final InvoiceService invoiceServiceImpl;
     private final OwnerService ownerServiceImpl;
+    private final UserContextHolder userContextHolderImpl;
 
     @GetMapping
     public String getInvoice(Model model) {
-        model.addAttribute("owner", ownerServiceImpl.getProfileInfo("kirill@gmail.com"));
-        model.addAttribute("invoices", invoiceServiceImpl.getAllInvoicesByOwnerId(100000L));
+        OwnerResponse owner = ownerServiceImpl.getProfileInfo(userContextHolderImpl
+                .getUserIdFromSecurityContext());
+        model.addAttribute("owner", owner);
+        model.addAttribute("invoices",
+                invoiceServiceImpl.getAllInvoicesByOwnerId(userContextHolderImpl
+                        .getUserIdFromSecurityContext()));
         return "invoices";
     }
 
     @PostMapping
     public String create(@ModelAttribute InvoiceForm invoiceForm) {
-        invoiceServiceImpl.saveInvoiceInfo(100000L, invoiceForm);
+        invoiceServiceImpl.saveInvoiceInfo(userContextHolderImpl
+                .getUserIdFromSecurityContext(), invoiceForm);
         return "redirect:/invoices";
     }
 }

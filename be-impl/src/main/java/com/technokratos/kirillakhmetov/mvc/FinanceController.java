@@ -1,8 +1,10 @@
 package com.technokratos.kirillakhmetov.mvc;
 
+import com.technokratos.kirillakhmetov.dto.response.OwnerResponse;
 import com.technokratos.kirillakhmetov.form.BankAccountForm;
 import com.technokratos.kirillakhmetov.form.ExpenseForm;
 import com.technokratos.kirillakhmetov.form.RevenueForm;
+import com.technokratos.kirillakhmetov.security.UserContextHolder;
 import com.technokratos.kirillakhmetov.service.BankAccountService;
 import com.technokratos.kirillakhmetov.service.OwnerService;
 import com.technokratos.kirillakhmetov.service.impl.FinanceServiceImpl;
@@ -21,29 +23,36 @@ public class FinanceController {
     private final OwnerService ownerServiceImpl;
     private final FinanceServiceImpl financeService;
     private final BankAccountService bankAccountServiceImpl;
+    private final UserContextHolder userContextHolderImpl;
 
     @GetMapping
     public String getMonthInfo(Model model) {
-        model.addAttribute("owner", ownerServiceImpl.getProfileInfo("kirill@gmail.com"));
-        model.addAttribute("monthInfo", financeService.getMonthInfo(100000L));
+        OwnerResponse owner = ownerServiceImpl.getProfileInfo(userContextHolderImpl
+                .getUserIdFromSecurityContext());
+        model.addAttribute("owner", owner);
+        model.addAttribute("monthInfo", financeService.getMonthInfo(userContextHolderImpl
+                .getUserIdFromSecurityContext()));
         return "finance";
     }
 
     @PostMapping("/expense")
     public String createExpense(@ModelAttribute("expenseForm") ExpenseForm expenseForm) {
-        financeService.saveExpense(100000L, expenseForm);
+        financeService.saveExpense(userContextHolderImpl
+                .getUserIdFromSecurityContext(), expenseForm);
         return "redirect:/finance";
     }
 
     @PostMapping("/money")
     public String createMoney(@ModelAttribute("bankAccountForm") BankAccountForm bankAccountForm) {
-        bankAccountServiceImpl.saveBankAccount(100000L, bankAccountForm);
+        bankAccountServiceImpl.saveBankAccount(userContextHolderImpl
+                .getUserIdFromSecurityContext(), bankAccountForm);
         return "redirect:/finance";
     }
 
     @PostMapping("/revenue")
     public String create(@ModelAttribute("revenueForm") RevenueForm revenueForm) {
-        financeService.addRevenue(100000L, revenueForm);
+        financeService.addRevenue(userContextHolderImpl
+                .getUserIdFromSecurityContext(), revenueForm);
         return "redirect:/finance";
     }
 }
