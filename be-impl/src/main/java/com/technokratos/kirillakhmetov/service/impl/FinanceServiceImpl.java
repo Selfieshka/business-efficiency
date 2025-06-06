@@ -1,6 +1,6 @@
 package com.technokratos.kirillakhmetov.service.impl;
 
-import com.technokratos.kirillakhmetov.dto.ExpenseCategorySummary;
+import com.technokratos.kirillakhmetov.dto.ExpenseCategoryDto;
 import com.technokratos.kirillakhmetov.dto.ProfitAnalysisDto;
 import com.technokratos.kirillakhmetov.dto.response.*;
 import com.technokratos.kirillakhmetov.entity.Finance;
@@ -92,10 +92,10 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public ExpenseResponse analyzeExpense(Long ownerId) {
-        List<ExpenseCategorySummary> finances = financeRepository.expenseAnalysisByOwnerId(ownerId);
+        List<ExpenseCategoryDto> finances = financeRepository.expenseAnalysisByOwnerId(ownerId);
 
         List<String> categories = finances.stream()
-                .map(ExpenseCategorySummary::category)
+                .map(ExpenseCategoryDto::category)
                 .toList();
 
         List<String> amounts = finances.stream()
@@ -107,6 +107,7 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public List<FinancePaginationResponse> getPage(Long ownerId, int page) {
+        System.out.println(LIMIT + " " + LIMIT * (page - 1));
         List<Finance> finances = financeRepository.getPartRevenuesAndExpenses(
                 ownerId, LIMIT, LIMIT * (page - 1)
         );

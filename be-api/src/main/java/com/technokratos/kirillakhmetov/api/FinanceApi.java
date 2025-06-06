@@ -4,6 +4,7 @@ import com.technokratos.kirillakhmetov.dto.response.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface FinanceApi {
 
     @GetMapping("/money")
     @ResponseStatus(HttpStatus.OK)
-    ApiFinanceResponse getMoney();
+    FinanceResponse getMoney();
 
     @GetMapping("/profit")
     @ResponseStatus(HttpStatus.OK)
@@ -41,6 +42,6 @@ public interface FinanceApi {
 
     @GetMapping("/revenues-expenses/items")
     @ResponseStatus(HttpStatus.OK)
-    List<FinancePaginationResponse> getItemsRevenuesExpenses();
+    List<FinancePaginationResponse> getItemsRevenuesExpenses(@RequestParam Integer page);
 
 }

@@ -1,6 +1,6 @@
 package com.technokratos.kirillakhmetov.dto;
 
-public record ExpenseCategorySummary(
+public record ExpenseCategoryDto(
         String category,
         Double totalAmount) {
 }

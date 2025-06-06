@@ -26,7 +26,7 @@ public class FinanceControllerApi implements FinanceApi {
     }
 
     @Override
-    public ApiFinanceResponse getMoney() {
+    public FinanceResponse getMoney() {
         return bankAccountServiceImpl.calculateAllAmount(100000L);
     }
 
@@ -51,7 +51,7 @@ public class FinanceControllerApi implements FinanceApi {
     }
 
     @Override
-    public List<FinancePaginationResponse> getItemsRevenuesExpenses() {
-        return financeService.getPage(100000L, 1);
+    public List<FinancePaginationResponse> getItemsRevenuesExpenses(Integer page) {
+        return financeService.getPage(100000L, page);
     }
 }

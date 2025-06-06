@@ -1,6 +1,6 @@
 package com.technokratos.kirillakhmetov.repository;
 
-import com.technokratos.kirillakhmetov.dto.ExpenseCategorySummary;
+import com.technokratos.kirillakhmetov.dto.ExpenseCategoryDto;
 import com.technokratos.kirillakhmetov.dto.ProfitAnalysisDto;
 import com.technokratos.kirillakhmetov.entity.Finance;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -68,7 +68,7 @@ public interface FinanceRepository extends JpaRepository<Finance, Long> {
             ORDER BY category
             """, nativeQuery = true
     )
-    List<ExpenseCategorySummary> expenseAnalysisByOwnerId(@Param("ownerId") Long ownerId);
+    List<ExpenseCategoryDto> expenseAnalysisByOwnerId(@Param("ownerId") Long ownerId);
 
     @Query("""
             SELECT f
