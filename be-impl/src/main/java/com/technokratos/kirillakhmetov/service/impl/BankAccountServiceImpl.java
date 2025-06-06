@@ -1,6 +1,6 @@
 package com.technokratos.kirillakhmetov.service.impl;
 
-import com.technokratos.kirillakhmetov.dto.response.ApiFinanceResponse;
+import com.technokratos.kirillakhmetov.dto.response.FinanceResponse;
 import com.technokratos.kirillakhmetov.form.BankAccountForm;
 import com.technokratos.kirillakhmetov.repository.BankAccountRepository;
 import com.technokratos.kirillakhmetov.repository.OwnerRepository;
@@ -27,7 +27,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public ApiFinanceResponse calculateAllAmount(Long ownerId) {
-        return new ApiFinanceResponse(bankAccountRepository.sumAllAmountByOwnerId(ownerId).orElse(0D));
+    public FinanceResponse calculateAllAmount(Long ownerId) {
+        return new FinanceResponse(bankAccountRepository.sumAllAmountByOwnerId(ownerId).orElse(0D));
     }
 }
