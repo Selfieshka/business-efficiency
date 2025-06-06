@@ -5,15 +5,17 @@ INSERT INTO owner (first_name,
                    email,
                    phone_number,
                    password,
-                   business_name)
+                   business_name,
+                   role)
 VALUES ('Кирилл',
         'Ахметов',
         'Эрикович',
         20,
         'kirill@gmail.com',
-        '+799872797711',
+        '+77777777777',
         'hashed_password_12345',
-        'Tomato Juice');
+        'Tomato Juice',
+        'USER');
 
 INSERT INTO position (name)
 VALUES ('Стажёр'),

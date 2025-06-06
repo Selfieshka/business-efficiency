@@ -1,5 +1,6 @@
 package com.technokratos.kirillakhmetov.entity;
 
+import com.technokratos.kirillakhmetov.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,6 +47,10 @@ public class Owner {
 
     @Column(name = "profile_photo_url")
     private String profilePhotoUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role = Role.USER;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankAccount> bankAccounts;

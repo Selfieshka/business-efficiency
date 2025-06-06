@@ -15,7 +15,8 @@ CREATE TABLE owner
     password          TEXT         NOT NULL,
     business_name     VARCHAR(30)  NOT NULL,
     profile_photo_url VARCHAR(255),
-    ------------------------------
+    role              VARCHAR(20)  NOT NULL,
+    ---------------------------------------------
     CONSTRAINT owner_id_pk PRIMARY KEY (owner_id),
     CONSTRAINT owner_email_uq UNIQUE (email)
 );
