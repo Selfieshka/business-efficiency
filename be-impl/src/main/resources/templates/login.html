@@ -50,8 +50,13 @@
         </span>
     </div>
 
+    <div class="message-box-logout" th:if="${param.deleted != null}">
+        <span>
+            Вы удалили свой аккаунт
+        </span>
+    </div>
+
     <div th:replace="~{fragments/errors :: errors}"></div>
-    <div th:replace="~{fragments/_footer :: footer}"></div>
 </div>
 
 </body>
