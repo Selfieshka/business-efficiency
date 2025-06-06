@@ -22,11 +22,11 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
             WHERE o.id = :id
             """)
     void updateOwnerProfile(
-            @Param("id") long id,
+            @Param("id") Long id,
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,
             @Param("patronymic") String patronymic,
-            @Param("age") int age,
+            @Param("age") Integer age,
             @Param("phoneNumber") String phoneNumber
     );
 
