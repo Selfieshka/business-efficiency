@@ -1,6 +1,5 @@
 package com.technokratos.kirillakhmetov.service.impl;
 
-import com.technokratos.kirillakhmetov.dto.OwnerDto;
 import com.technokratos.kirillakhmetov.dto.response.OwnerResponse;
 import com.technokratos.kirillakhmetov.entity.Owner;
 import com.technokratos.kirillakhmetov.form.ProfileForm;
@@ -31,8 +30,8 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto getProfileInfo(String email) {
-        return ownerMapper.toOwnerDto(
+    public OwnerResponse getProfileInfo(String email) {
+        return ownerMapper.toResponse(
                 ownerRepository
                         .findByEmail(email)
                         .orElseThrow(() -> new RuntimeException("Пользователь с почтой %s - не найден".formatted(email)))
@@ -74,6 +73,4 @@ public class OwnerServiceImpl implements OwnerService {
             throw new RuntimeException(e);
         }
     }
-
-
 }

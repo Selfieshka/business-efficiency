@@ -1,6 +1,5 @@
 package com.technokratos.kirillakhmetov.service;
 
-import com.technokratos.kirillakhmetov.dto.OwnerDto;
 import com.technokratos.kirillakhmetov.dto.response.OwnerResponse;
 import com.technokratos.kirillakhmetov.form.ProfileForm;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface OwnerService {
     Long getOwnerIdByEmail(String email);
 
-    OwnerDto getProfileInfo(String email);
+    OwnerResponse getProfileInfo(String email);
 
     OwnerResponse changePersonalData(long ownerId, ProfileForm profileForm);
 

@@ -1,6 +1,6 @@
 package com.technokratos.kirillakhmetov.mvc;
 
-import com.technokratos.kirillakhmetov.dto.OwnerDto;
+import com.technokratos.kirillakhmetov.dto.response.OwnerResponse;
 import com.technokratos.kirillakhmetov.form.ProfileForm;
 import com.technokratos.kirillakhmetov.service.OwnerService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class ProfileController {
 
     @GetMapping
     public String profile(Model model) {
-        OwnerDto owner = ownerServiceImpl.getProfileInfo("kirill@gmail.com");
+        OwnerResponse owner = ownerServiceImpl.getProfileInfo("kirill@gmail.com");
         model.addAttribute("owner", owner);
         return "profile";
     }
