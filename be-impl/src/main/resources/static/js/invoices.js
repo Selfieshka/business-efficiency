@@ -39,14 +39,14 @@ function toggleDetails(row) {
 
 function deleteInvoice(invoiceId, element) {
     $.ajax({
-        url: basePath + `/invoices/${invoiceId}`,
+        url: basePath + `/api/v1/invoices/${invoiceId}`,
         type: 'DELETE',
         success: function (response) {
-            console.log('Пользователь успешно удален:', response);
+            console.log('Накладная успешно удалена:', response);
             element.remove();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.error('Ошибка при удалении пользователя:', textStatus, errorThrown);
+            console.error('Ошибка при удалении накладной:', textStatus, errorThrown);
         }
     });
 }

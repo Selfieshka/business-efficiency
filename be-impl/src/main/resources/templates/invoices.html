@@ -43,19 +43,19 @@
 
         <div th:each="invoice : ${invoices}"
              class="invoice-row"
-             th:attr="data-invoice-id=${invoice.invoiceId},
-                      data-number=${invoice.number},
-                      data-date=${invoice.date},
-                      data-sum=${invoice.sum},
-                      data-count=${invoice.count},
-                      data-count-tov=${invoice.countTov}"
+             th:attr="data-invoice-id=${invoice.invoiceId()},
+                      data-number=${invoice.number()},
+                      data-date=${invoice.date()},
+                      data-sum=${invoice.sum()},
+                      data-count=${invoice.countPositions()},
+                      data-count-tov=${invoice.totalCountProducts()}"
              onclick="showInvoiceInfoFromElement(this)">
             <div class="invoice-info">
-                <span th:text="${invoice.number}"></span>
-                <span th:text="${invoice.date}"></span>
+                <span th:text="${invoice.number()}"></span>
+                <span th:text="${invoice.date()}"></span>
             </div>
             <span class="delete-btn"
-                  th:onclick="'deleteInvoice(' + ${invoice.invoiceId} + ', this.closest(\'.invoice-row\'))'">&times;</span>
+                  th:onclick="'deleteInvoice(' + ${invoice.invoiceId()} + ', this.closest(\'.invoice-row\'))'">&times;</span>
         </div>
     </div>
 

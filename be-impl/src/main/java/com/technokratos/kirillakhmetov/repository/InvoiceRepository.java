@@ -1,7 +1,7 @@
 package com.technokratos.kirillakhmetov.repository;
 
-import com.technokratos.kirillakhmetov.dto.InvoiceDto;
 import com.technokratos.kirillakhmetov.dto.ProductDto;
+import com.technokratos.kirillakhmetov.dto.response.InvoiceResponse;
 import com.technokratos.kirillakhmetov.entity.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +17,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
                     WHERE i.owner.id = :ownerId
                     """
     )
-    void saveInvoiceWithProducts(InvoiceDto invoiceDto, List<ProductDto> products);
+    void saveInvoiceWithProducts(InvoiceResponse invoiceResponse, List<ProductDto> products);
 
     @Query(
             """

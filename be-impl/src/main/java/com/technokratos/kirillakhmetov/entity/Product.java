@@ -36,5 +36,5 @@ public class Product {
     private Integer quantity;
 
     @Column(name = "unit_price", nullable = false)
-    private Double unitPrice;
+    private Double costPerUnit;
 }
