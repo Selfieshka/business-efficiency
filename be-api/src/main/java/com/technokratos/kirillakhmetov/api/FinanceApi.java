@@ -21,7 +21,7 @@ public interface FinanceApi {
 
     @GetMapping("/money")
     @ResponseStatus(HttpStatus.OK)
-    ApiFinanceDto getMoney();
+    ApiFinanceResponse getMoney();
 
     @GetMapping("/profit")
     @ResponseStatus(HttpStatus.OK)
@@ -37,10 +37,10 @@ public interface FinanceApi {
 
     @GetMapping("/revenues-expenses/count")
     @ResponseStatus(HttpStatus.OK)
-    String getCountRevenuesExpenses();
+    PageResponse getCountRevenuesExpenses();
 
     @GetMapping("/revenues-expenses/items")
     @ResponseStatus(HttpStatus.OK)
-    List<FinancePaginationDto> getItemsRevenuesExpenses();
+    List<FinancePaginationResponse> getItemsRevenuesExpenses();
 
 }

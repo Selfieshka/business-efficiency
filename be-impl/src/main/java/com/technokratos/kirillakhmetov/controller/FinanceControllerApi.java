@@ -3,7 +3,7 @@ package com.technokratos.kirillakhmetov.controller;
 import com.technokratos.kirillakhmetov.api.FinanceApi;
 import com.technokratos.kirillakhmetov.dto.response.*;
 import com.technokratos.kirillakhmetov.service.BankAccountService;
-import com.technokratos.kirillakhmetov.service.FinanceService;
+import com.technokratos.kirillakhmetov.service.impl.FinanceServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,9 +11,9 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ApiFinanceController implements FinanceApi {
-    private final FinanceService financeService;
-    private final BankAccountService bankAccountService;
+public class FinanceControllerApi implements FinanceApi {
+    private final FinanceServiceImpl financeService;
+    private final BankAccountService bankAccountServiceImpl;
 
     @Override
     public FinanceResponse getRevenue() {
@@ -26,8 +26,8 @@ public class ApiFinanceController implements FinanceApi {
     }
 
     @Override
-    public ApiFinanceDto getMoney() {
-        return bankAccountService.calculateAllAmount(100000L);
+    public ApiFinanceResponse getMoney() {
+        return bankAccountServiceImpl.calculateAllAmount(100000L);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class ApiFinanceController implements FinanceApi {
     }
 
     @Override
-    public String getCountRevenuesExpenses() {
+    public PageResponse getCountRevenuesExpenses() {
         return financeService.getCountItems(100000L);
     }
 
     @Override
-    public List<FinancePaginationDto> getItemsRevenuesExpenses() {
+    public List<FinancePaginationResponse> getItemsRevenuesExpenses() {
         return financeService.getPage(100000L, 1);
     }
 }
