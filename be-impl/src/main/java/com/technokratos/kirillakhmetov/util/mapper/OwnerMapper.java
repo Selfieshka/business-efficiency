@@ -1,6 +1,7 @@
 package com.technokratos.kirillakhmetov.util.mapper;
 
 import com.technokratos.kirillakhmetov.dto.OwnerDto;
+import com.technokratos.kirillakhmetov.dto.response.OwnerResponse;
 import com.technokratos.kirillakhmetov.entity.Owner;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -12,4 +13,6 @@ public interface OwnerMapper {
     Owner toOwner(OwnerDto ownerDto);
 
     OwnerDto toOwnerDto(Owner owner);
+
+    OwnerResponse toResponse(Owner owner);
 }

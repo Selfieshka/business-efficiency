@@ -19,15 +19,15 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
                 o.patronymic = :patronymic,
                 o.age = :age,
                 o.phoneNumber = :phoneNumber
-            WHERE o.email = :email
+            WHERE o.id = :id
             """)
-    int updateOwnerProfile(
+    void updateOwnerProfile(
+            @Param("id") long id,
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,
             @Param("patronymic") String patronymic,
             @Param("age") int age,
-            @Param("phoneNumber") String phoneNumber,
-            @Param("email") String email
+            @Param("phoneNumber") String phoneNumber
     );
 
     @Modifying
@@ -40,10 +40,10 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
     @Modifying
     @Query("""
             UPDATE Owner o
-            SET o.profilePhotoUrl = :url
-            WHERE o.email = :email
+            SET o.profilePhotoUrl = :profilePhotoUrl
+            WHERE o.id = :ownerId
             """)
-    void updateProfilePhotoUrlByEmail(
-            @Param("url") String url,
-            @Param("email") String email);
+    void updateProfilePhotoUrlByOwnerId(
+            @Param("ownerId") long ownerId,
+            @Param("profilePhotoUrl") String profilePhotoUrl);
 }

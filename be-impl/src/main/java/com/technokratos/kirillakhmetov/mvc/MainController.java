@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 @RequiredArgsConstructor
 public class MainController {
-    private final OwnerService ownerService;
+    private final OwnerService ownerServiceImpl;
 
     @GetMapping
     public String mainPage(Model model) {
-        model.addAttribute("owner", ownerService.getProfileInfo("kirill@gmail.com"));
+        model.addAttribute("owner", ownerServiceImpl.getProfileInfo("kirill@gmail.com"));
         return "main";
     }
 }

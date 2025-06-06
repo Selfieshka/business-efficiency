@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/finance")
 public class FinanceController {
-    private final OwnerService ownerService;
+    private final OwnerService ownerServiceImpl;
     private final FinanceServiceImpl financeService;
     private final BankAccountService bankAccountServiceImpl;
 
     @GetMapping
     public String getMonthInfo(Model model) {
-        model.addAttribute("owner", ownerService.getProfileInfo("kirill@gmail.com"));
+        model.addAttribute("owner", ownerServiceImpl.getProfileInfo("kirill@gmail.com"));
         model.addAttribute("monthInfo", financeService.getMonthInfo(100000L));
         return "finance";
     }

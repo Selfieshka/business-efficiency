@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class InvoiceController {
     private final InvoiceService invoiceServiceImpl;
-    private final OwnerService ownerService;
+    private final OwnerService ownerServiceImpl;
 
     @GetMapping
     public String getInvoice(Model model) {
-        model.addAttribute("owner", ownerService.getProfileInfo("kirill@gmail.com"));
+        model.addAttribute("owner", ownerServiceImpl.getProfileInfo("kirill@gmail.com"));
         model.addAttribute("invoices", invoiceServiceImpl.getAllInvoicesByOwnerId(100000L));
         return "invoices";
     }

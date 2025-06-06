@@ -96,7 +96,7 @@ $(document).ready(function () {
         formData.append('profilePhoto', file);
 
         $.ajax({
-            url: basePath + '/profile/upload',
+            url: basePath + '/api/v1/profile/upload',
             type: 'POST',
             data: formData,
             contentType: false,
