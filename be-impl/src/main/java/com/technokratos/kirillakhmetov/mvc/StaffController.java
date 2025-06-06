@@ -28,8 +28,7 @@ public class StaffController {
 
     @PostMapping
     public String saveEmployee(@ModelAttribute("employeeForm") EmployeeForm employeeForm) {
-        employeeForm.setOwnerId(100000L);
-        staffServiceImpl.saveEmployee(employeeForm);
+        staffServiceImpl.saveEmployee(100000L, employeeForm);
         return "redirect:/staff";
     }
 }

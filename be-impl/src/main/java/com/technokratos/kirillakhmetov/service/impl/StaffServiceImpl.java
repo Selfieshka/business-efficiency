@@ -42,13 +42,13 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     @Transactional
-    public void saveEmployee(EmployeeForm employeeForm) {
-        Owner owner = ownerRepository.findById(employeeForm.getOwnerId())
-                .orElseThrow(() -> new RuntimeException("User with id = %s - not found".formatted(employeeForm.getOwnerId())));
+    public void saveEmployee(Long ownerId, EmployeeForm employeeForm) {
+        Owner owner = ownerRepository.findById(ownerId)
+                .orElseThrow(() -> new RuntimeException("User with id = %s - not found".formatted(ownerId)));
 
         Employee employee = employeeMapper.toEmployee(employeeForm, owner);
 
-        Set<String> positionNames = new HashSet<>(employeeForm.getPositions());
+        Set<String> positionNames = new HashSet<>(employeeForm.positions());
 
         List<Position> positions = positionRepository.findAllByNameIn(positionNames);
         Map<String, Position> positionMap = positions.stream()
@@ -60,7 +60,7 @@ public class StaffServiceImpl implements StaffService {
             throw new RuntimeException("Позиция не была найдена: " + missing);
         }
 
-        employeeForm.getPositions().forEach(name -> employee.getEmployeePositions()
+        employeeForm.positions().forEach(name -> employee.getEmployeePositions()
                 .add(employeePositionMapper.toEmployeePosition(employee, positionMap.get(name)))
         );
 

@@ -8,7 +8,7 @@ import java.util.List;
 public interface StaffService {
     List<EmployeeResponse> getStaffByOwnerId(Long ownerId);
 
-    void saveEmployee(EmployeeForm employeeForm);
+    void saveEmployee(Long ownerId, EmployeeForm employeeForm);
 
     void deleteEmployeeById(Long employeeId);
 }
