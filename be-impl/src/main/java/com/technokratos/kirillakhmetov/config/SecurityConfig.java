@@ -28,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 public class SecurityConfig {
     private static final String[] UNSECURED_PATHS = {
             "/welcome", "/login", "/registration", "/auth/**", "/oauth2/**",
+            "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html",
             "/style/**", "/js/**", "/img/**"
     };
     private final UserDetailsService userDetailsService;
