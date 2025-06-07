@@ -49,13 +49,17 @@
     <div class="modal" id="modal-revenue-container">
         <div class="modal-content" id="modal-revenue-content">
             <span class="nav-icon material-symbols-rounded close" id="close-revenue">Close</span>
-            <form method="POST" th:action="@{/finance/revenue}">
+            <form method="POST" th:action="@{/finance/revenue}" th:object="${revenueForm}">
                 <h3>Добавление выручки</h3>
                 <label for="revenue-amount">Сумма</label>
-                <input type="number" step="any" min="1" max="9999999999" id="revenue-amount" name="amount" required/>
+                <input type="number" step="any" min="1" max="9999999999" id="revenue-amount" th:field="*{amount}"
+                       required/>
+                <div class="error-message" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+
                 <label for="revenue-date">Дата, за которую вносится выручка:</label>
-                <input type="date" id="revenue-date" name="date" min="2000-01-01" max="9999-12-31" required/>
-                <input type="hidden" name="category" value="Выручка">
+                <input type="date" id="revenue-date" th:field="*{date}" min="2000-01-01" max="9999-12-31" required/>
+                <div class="error-message" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+                <input type="hidden" th:field="*{category}" value="Выручка">
                 <button type="submit">Добавить</button>
             </form>
         </div>
