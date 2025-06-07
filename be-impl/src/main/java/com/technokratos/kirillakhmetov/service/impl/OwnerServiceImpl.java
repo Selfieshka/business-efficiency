@@ -81,7 +81,12 @@ public class OwnerServiceImpl implements OwnerService {
     public void save(RegistrationForm registrationForm) {
         ownerRepository.save(ownerMapper.toEntity(
                 registrationForm,
-                passwordEncoder.encode(registrationForm.password())
+                passwordEncoder.encode(registrationForm.getPassword())
         ));
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return ownerRepository.existsByEmail(email);
     }
 }

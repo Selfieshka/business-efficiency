@@ -46,4 +46,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
     void updateProfilePhotoUrlByOwnerId(
             @Param("ownerId") long ownerId,
             @Param("profilePhotoUrl") String profilePhotoUrl);
+
+    boolean existsByEmail(String email);
 }

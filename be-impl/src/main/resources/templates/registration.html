@@ -11,29 +11,32 @@
 <body>
 
 <div class="wrapper">
-    <form method="POST" th:action="@{/registration}">
+    <form method="POST" th:action="@{/registration}" th:object="${registrationForm}">
         <h2>Присоединяйтесь к нам,<br>создайте свой аккаунт</h2>
         <h1>Регистрация</h1>
         <div class="input-box">
-            <input name="firstName" type="text" autocomplete="off" placeholder="Введите имя" required/>
+            <input name="firstName" type="text" th:field="*{firstName}" autocomplete="off" placeholder="Введите имя"/>
         </div>
         <div class="input-box">
-            <input name="businessName" type="text" autocomplete="off" placeholder="Введите название бизнеса" required/>
+            <input name="businessName" type="text" th:field="*{businessName}" autocomplete="off"
+                   placeholder="Введите название бизнеса"/>
         </div>
         <div class="input-box">
-            <input name="email" type="email" autocomplete="off" placeholder="Введите email"/>
+            <input name="email" type="email" th:field="*{email}" autocomplete="off" placeholder="Введите email"/>
         </div>
         <div class="input-box">
-            <input name="password" type="password" autocomplete="off" minlength="5" placeholder="Придумайте пароль"
-                   required/>
+            <input name="password" type="password" th:field="*{password}" autocomplete="off"
+                   placeholder="Придумайте пароль"/>
         </div>
+        <div class="error-message" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+        <div class="error-message" th:if="${#fields.hasErrors('businessName')}" th:errors="*{businessName}"></div>
+        <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <div class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <button type="submit" class="btn">Зарегистрироваться</button>
         <div class="register-link">
             <p>Уже зарегистрировались? <a class="login" th:href="@{/login}">Войти</a></p>
         </div>
     </form>
-
-    <div th:replace="~{fragments/errors :: errors}"></div>
 </div>
 
 </body>

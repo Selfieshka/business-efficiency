@@ -17,4 +17,6 @@ public interface OwnerService {
     void uploadProfilePhoto(long ownerId, MultipartFile avatarRequest);
 
     void save(RegistrationForm registrationForm);
+
+    boolean existsByEmail(String email);
 }
