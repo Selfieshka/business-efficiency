@@ -107,7 +107,6 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public List<FinancePaginationResponse> getPage(Long ownerId, int page) {
-        System.out.println(LIMIT + " " + LIMIT * (page - 1));
         List<Finance> finances = financeRepository.getPartRevenuesAndExpenses(
                 ownerId, LIMIT, LIMIT * (page - 1)
         );

@@ -18,6 +18,5 @@ public class GoogleOAuthProperties {
     private String accessType;
     private String prompt;
     private String scope;
-    private String code;
     private String grantType;
 } 

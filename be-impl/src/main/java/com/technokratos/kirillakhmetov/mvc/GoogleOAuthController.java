@@ -25,6 +25,6 @@ public class GoogleOAuthController {
     public String callback(@RequestParam("code") String code) {
         log.info("Received callback from Google with code: {}", code);
         googleOAuthService.processOAuthPostLogin(code);
-        return "redirect:/main";
+        return "redirect:/profile";
     }
 } 
