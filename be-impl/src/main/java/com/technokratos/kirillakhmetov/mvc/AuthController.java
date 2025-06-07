@@ -2,7 +2,7 @@ package com.technokratos.kirillakhmetov.mvc;
 
 import com.technokratos.kirillakhmetov.form.RegistrationForm;
 import com.technokratos.kirillakhmetov.service.OwnerService;
-import com.technokratos.kirillakhmetov.validation.RegistrationValidator;
+import com.technokratos.kirillakhmetov.validator.RegistrationValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

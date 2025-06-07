@@ -1,4 +1,4 @@
-package com.technokratos.kirillakhmetov.validation;
+package com.technokratos.kirillakhmetov.validator;
 
 import com.technokratos.kirillakhmetov.form.RegistrationForm;
 import com.technokratos.kirillakhmetov.service.OwnerService;
