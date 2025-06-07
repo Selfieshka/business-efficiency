@@ -18,9 +18,23 @@ spring:
 
 server:
   servlet:
-    context-path: /business-efficiency
+    context-path: /be
 
 cloudinary:
   cloud-name: ${CLOUDINARY_CLOUD_NAME}
   api-key: ${CLOUDINARY_API_KEY}
   api-secret: ${CLOUDINARY_API_SECRET}
+
+google:
+  oauth:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    redirect-uri: ${REDIRECTED_URI}
+    auth-uri: ${AUTH_URI}
+    token-url: ${TOKEN_URL}
+    user-info-url: ${USER_INFO_URL}
+    response-type: ${RESPONSE_TYPE}
+    access_type: ${ACCESS_TYPE}
+    prompt: ${PROMT}
+    scope: ${SCOPE}
+    grant-type: ${GRANT_TYPE}
