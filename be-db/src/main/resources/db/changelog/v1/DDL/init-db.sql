@@ -13,7 +13,7 @@ CREATE TABLE owner
     email             VARCHAR(255) NOT NULL,
     phone_number      VARCHAR(30),
     password          TEXT         NOT NULL,
-    business_name     VARCHAR(30)  NOT NULL,
+    business_name     VARCHAR(30),
     profile_photo_url VARCHAR(255),
     role              VARCHAR(20)  NOT NULL,
     ---------------------------------------------

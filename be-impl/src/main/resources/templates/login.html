@@ -32,6 +32,14 @@
         </div>
         <button type="submit" class="btn">Войти</button>
     </form>
+
+    <div class="google-btn-container">
+        <a th:href="@{/auth/google/login}" class="google-btn" onclick="console.log('Google button clicked')">
+            <img src="https://www.google.com/favicon.ico" alt="Google">
+            <span>Войти через Google</span>
+        </a>
+    </div>
+
     <div class="register-link">
         <p>Ещё не зарегистрировались?
             <a class="registration" th:href="@{/registration}">Регистрация</a>

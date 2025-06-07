@@ -1,6 +1,7 @@
 package com.technokratos.kirillakhmetov.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,14 +14,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
     private static final String[] UNSECURED_PATHS = {
-            "/welcome", "/login", "/registration",
+            "/welcome", "/login", "/registration", "/auth/**", "/oauth2/**",
             "/style/**", "/js/**", "/img/**"
     };
     private final UserDetailsService userDetailsService;
@@ -35,15 +42,34 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .usernameParameter("email")
-                        .defaultSuccessUrl("/main")
+                        .defaultSuccessUrl("/profile", true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
-                        .permitAll());
+                        .permitAll())
+                .securityContext(context -> context
+                        .requireExplicitSave(false)
+                        .securityContextRepository(securityContextRepository()))
+                .requestCache(cache -> cache
+                        .requestCache(requestCache()));
 
         return http.build();
+    }
+
+    @Bean
+    public SecurityContextRepository securityContextRepository() {
+        HttpSessionSecurityContextRepository repository = new HttpSessionSecurityContextRepository();
+        repository.setDisableUrlRewriting(true);
+        return repository;
+    }
+
+    @Bean
+    public RequestCache requestCache() {
+        HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+        requestCache.setCreateSessionAllowed(true);
+        return requestCache;
     }
 
     @Bean
@@ -60,6 +86,11 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder);
 
         return authenticationManagerBuilder.build();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
 

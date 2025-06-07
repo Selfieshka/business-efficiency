@@ -71,7 +71,6 @@ public class OwnerServiceImpl implements OwnerService {
     public void uploadProfilePhoto(long ownerId, MultipartFile avatarRequest) {
         try (InputStream inputStream = avatarRequest.getInputStream()) {
             String url = imageService.uploadProfilePhoto(inputStream, avatarRequest.getOriginalFilename());
-            System.out.println(url);
             ownerRepository.updateProfilePhotoUrlByOwnerId(ownerId, url);
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -42,7 +42,7 @@ public class Owner {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "business_name", length = 30, nullable = false)
+    @Column(name = "business_name", length = 30)
     private String businessName;
 
     @Column(name = "profile_photo_url")
