@@ -59,7 +59,7 @@
                 <label for="revenue-date">Дата, за которую вносится выручка:</label>
                 <input type="date" id="revenue-date" th:field="*{date}" min="2000-01-01" max="9999-12-31" required/>
                 <div class="error-message" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
-                <input type="hidden" th:field="*{category}" value="Выручка">
+                <input type="hidden" th:field="*{category}" th:value="Выручка">
                 <button type="submit">Добавить</button>
             </form>
         </div>

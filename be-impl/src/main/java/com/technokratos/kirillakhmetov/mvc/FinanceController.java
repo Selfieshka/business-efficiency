@@ -41,6 +41,7 @@ public class FinanceController {
 
     @PostMapping("/expense")
     public String createExpense(@ModelAttribute("expenseForm") ExpenseForm expenseForm) {
+        //todo: Здесь мы сохраняем расход
         financeService.saveExpense(userContextHolderImpl
                 .getUserIdFromSecurityContext(), expenseForm);
         return "redirect:/finance";
@@ -67,7 +68,8 @@ public class FinanceController {
                     .getUserIdFromSecurityContext()));
             return "finance";
         }
-
+        //todo: Здесь мы сохраняем доход
+        revenueForm.setCategory("Доход");
         financeService.addRevenue(userContextHolderImpl
                 .getUserIdFromSecurityContext(), revenueForm);
         return "redirect:/finance";

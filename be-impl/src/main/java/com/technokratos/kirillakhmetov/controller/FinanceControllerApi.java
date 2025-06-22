@@ -43,6 +43,7 @@ public class FinanceControllerApi implements FinanceApi {
 
     @Override
     public ProfitResponse getProfitAnalytics() {
+        //todo: Здесь мы берем предикт значения для графика прогнозируемой прибыли
         return financeService.analyzeProfit(userContextHolderImpl
                 .getUserIdFromSecurityContext());
     }

@@ -38,6 +38,7 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public void addRevenue(long ownerId, RevenueForm revenueForm) {
+        revenueForm.setCategory("Выручка");
         financeRepository.save(financeMapper.toFinance(
                 revenueForm,
                 ownerRepository.findById(ownerId)
