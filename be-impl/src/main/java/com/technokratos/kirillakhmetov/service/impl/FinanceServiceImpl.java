@@ -157,4 +157,8 @@ public class FinanceServiceImpl implements FinanceService {
 
         return Double.parseDouble(numbers.getLast()) + (last - first) / (numbers.size() - 1);
     }
+
+    public void test() {
+        System.out.println("test");
+    }
 }
